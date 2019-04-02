@@ -8,7 +8,7 @@ fi
 
 compiler_path=${1:-$(which g++)}
 output_path=${2:-compiler_options.txt}
-make_command=${3:-make -j $(nproc)}
+make_command=${3:-make}
 
 echo "compiler_path=$compiler_path"
 echo "output_path=$output_path"
