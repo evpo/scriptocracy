@@ -21,7 +21,7 @@ function finish()
 
 cat >$tmp_dir/$proxy_name <<EOM
 #!/bin/bash
-echo "\$PWD \$@" >> $pipe_path
+flock -x $pipe_path echo "\$PWD \$@" >> $pipe_path
 $compiler_path \$@
 EOM
 chmod 744 $tmp_dir/$proxy_name
@@ -31,4 +31,4 @@ mkfifo $pipe_path
 python3 $script_dir/receive-compiler.py $pipe_path $output_path &
 receive_pid=$!
 trap "finish" EXIT
-PATH=${tmp_dir}:$PATH make -j1
+PATH=${tmp_dir}:$PATH make $(nproc)
