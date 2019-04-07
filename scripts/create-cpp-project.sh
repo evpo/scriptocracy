@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-version=v20180306
+version=v20190407
 
 if [[ "$1" == "--help" ]]; then
     echo "$0 [project_path]" >&2
