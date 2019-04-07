@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-version=v20190407
+version=master
 
 if [[ "$1" == "--help" ]]; then
     echo "$0 [project_path]" >&2
@@ -17,7 +17,7 @@ tmp_dir=$(mktemp -d /tmp/cpp-project-template.XXXXXXXX)
 trap "rm -rf $tmp_dir" EXIT
 #-C $tmp_dir
 wget -O - https://github.com/evpo/cpp-project-template/archive/${version}.tar.gz | tar xzvf - -C "$tmp_dir"
-mv $tmp_dir/cpp-project-template-* "$project_path"
+mv $tmp_dir/cpp-project-template-${version} "$project_path"
 cd "$project_path"
 git init .
 git add -A
