@@ -18,10 +18,15 @@ def tailf(filename):
     for line in tail_proc.stdout:
         yield line
 
-includes = set()
+#order matter for includes. Hence it is a list
+includes = list()
 defines = set()
 headers = set()
 arch = set()
+
+def append_include(include):
+    if include not in includes:
+        includes.append(include)
 
 def check_prefix(word, dq, prefix):
     if word.startswith(prefix):
@@ -40,9 +45,9 @@ def process_line(line):
             res = check_prefix(word, d, '-isystem')
         if res:
             if res.startswith('/'):
-                includes.add(res)
+                append_include(res)
             else:
-                includes.add(os.path.abspath(os.path.join(pwd, res)))
+                append_include(os.path.abspath(os.path.join(pwd, res)))
             continue
 
         res = check_prefix(word, d, '-D')
@@ -53,9 +58,9 @@ def process_line(line):
         res = check_prefix(word, d, '-include')
         if res:
             if res.startswith('/'):
-                includes.add(res)
+                append_include(res)
             else:
-                headers.add(os.path.abspath(os.path.join(pwd, res)))
+                append_include(os.path.abspath(os.path.join(pwd, res)))
             continue
 
         res = check_prefix(word, d, '-m')
