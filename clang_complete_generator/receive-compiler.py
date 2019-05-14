@@ -65,7 +65,7 @@ def process_line(line):
 
         res = check_prefix(word, d, '-m')
         if res:
-            arch.add(word)
+            arch.add(res)
             continue
 
 def write_results():
@@ -78,7 +78,7 @@ def write_results():
     print('writing results')
     with open(output_path, 'w') as out:
         for tup in (
-                ('-m {0}\n', arch),
+                ('-m{0}\n', arch),
                 ('-I {0}\n', includes),
                 ('-D {0}\n', defines),
                 ('-include {0}\n', headers)
