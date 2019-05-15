@@ -105,7 +105,7 @@ for line in tailf(pipe_path):
     line = line.rstrip('\n')
     if line == '__EOF__':
         break
-    print('RECORDING: ' + line)
+    print('RECORDING: line length is {0}'.format(len(line)))
     process_line(line)
 
 write_results()
