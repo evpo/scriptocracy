@@ -21,4 +21,5 @@ mv $tmp_dir/cpp-project-template-${version} "$project_path"
 cd "$project_path"
 git init .
 git add -A
+git add -f deps
 git commit -m "initial commit"
